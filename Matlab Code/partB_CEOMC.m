@@ -1,5 +1,5 @@
 %
-% By Weiming Ma, Qiang Li, Zhao Yu
+% By James Ma, Qiang Li, Zhao Yu
 %
 
 function ceo = partB_CEOMC(e0, sigmaElec, f0, sigmaFuel, corr, heatRate, r, tc, ts, emitRate, emitCost, capitalCost, N)

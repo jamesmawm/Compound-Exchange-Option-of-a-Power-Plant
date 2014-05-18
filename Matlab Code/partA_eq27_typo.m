@@ -1,5 +1,5 @@
 %
-% By Weiming Ma, Qiang Li, Zhao Yu
+% By James Ma, Qiang Li, Zhao Yu
 %
 
 %%%%%%%%%%%%%%%%%5 CEO in anlytic solution in typo version  %%%%%%%%%%%%%
