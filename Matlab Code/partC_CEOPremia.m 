@@ -1,0 +1,54 @@
+%
+% By Weiming Ma, Qiang Li, Zhao Yu
+%
+
+function [ ceo, CI, c, exerciseFrequency ] = partC_CEOPremia(e0, sigmaElec, f0, sigmaFuel, corr, ...
+    H, r, tc, ts, pilotDz1, pilotDz2, dz1, dz2, ...
+    tau, sqrtTc, rtc, MP, nudcE, nudcF, ...
+    sigmaSqrtTcElec, sigmaSqrtTcFuel, sigmaPortfolio, ...
+    halfSigmaPortfolioSqTau, sigmaPortfolioSqrtTau ...
+    )
+
+Vc = e0.*exp(nudcE + sigmaSqrtTcElec.*p ilotDz1);
+Fc = f0.*exp(nudcF + sigmaSqrtTcFuel.*pilotDz2);
+Dc = H.*(Fc + MP);
+d1 = (log(Vc./Dc) + halfSigmaPortfolioSqTau) ./ sigmaPortfolioSqrtTau;
+d2 = d1 - sigmaPortfolioSqrtTau;
+seo = max(Vc.*normcdf(d1)-Dc.*normcdf(d2), 0);
+ceoMC = exp(-rtc).*max(seo-mean(seo), 0);
+%%%%%% use SEO as control variate %%%%%%%%%                                         
+%%%%%% Get c_coeff%%%
+varCov = cov(seo, ceoMC);
+c_coeff = -varCov(1,2) / var(seo);
+
+% Using control variates.  
+Vc = e0.*exp(nudcE + sigmaSqrtTcElec.*dz1);
+Fc = f0.*exp(nudcF + sigmaSqrtTcFuel.*dz2);
+Dc = H.*(Fc + MP);
+d1 = (log(Vc./Dc) + halfSigmaPortfolioSqTau) ./ sigmaPortfolioSqrtTau;
+d2 = d1 - sigmaPortfolioSqrtTau;
+seo = max(Vc.*normcdf(d1)-Dc.*normcdf(d2), 0);
+
+%%% fix K to mean of seo %%%%%
+K = mean(seo);
+
+% Theoretical expectations of SEO.
+EVc = e0.*exp(rtc);
+EFc = f0.*exp(rtc);
+EDc = H.*(EFc + MP);
+d1 = (log(EVc./EDc) + halfSigmaPortfolioSqTau) ./ sigmaPortfolioSqrtTau;
+d2 = d1 - sigmaPortfolioSqrtTau;
+Eseo = max(EVc.*normcdf(d1)-EDc.*normcdf(d2), 0);
+
+% Get CEO using control variates.
+ceoMC = exp(-rtc).*max(seo - K, 0);
+c =  ceoMC + c_coeff.*(seo - Eseo);
+ceo = mean(c);
+
+[MUHAT,SIGMAHAT,MUCI,SIGMACI]=normfit(c);
+CI = MUCI;
+exerciseFrequency = mean(c>0);                                             
+end
+
+
+
