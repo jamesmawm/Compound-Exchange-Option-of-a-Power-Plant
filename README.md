@@ -1,11 +1,10 @@
-Task: An Analysis of Power Plant Investment Opportunities using a
-Compound Exchange Option
+Task: An Analysis of Power Plant Investment Opportunities using a Compound Exchange Option
 ====================================================
 
 Assume that you are a quantitative financial analyst working for an international energy company. You are asked to evaluate various investment opportunities of power plants using the compound exchange option (hereafter, CEO) approach as in Section 5 of October 29, 2013 version of Kang and Letourneau (2013).
 
 a) Assume that you study Kang and Letourneau (2013) to do your job. Assume that you study Carr (1988) because Kang and Letourneau cites Carr (1988). Assume that you find a technical error in Carr (1988). Specifically, assume that you have found that the first equation in page 1243 is
-wrong. Carr (1988) mistakenly wrote 𝑑1(𝑦, 𝜏) = (ln(𝑦)+𝜎^2𝜏)𝜎√𝜏 , the correct formula should be 𝑑1(𝑦, 𝜏) = (ln(𝑦)+𝟎.𝟓𝜎^2𝜏)/𝜎√𝜏.
+wrong. Carr (1988) mistakenly wrote 𝑑1(𝑦, 𝜏) = (ln(𝑦)+𝜎^2𝜏)/𝜎√𝜏. The correct formula should be 𝑑1(𝑦, 𝜏) = (ln(𝑦)+𝟎.𝟓𝜎^2𝜏)/𝜎√𝜏.
 
 Use Monte-Carlo simulation to verify that 𝑑1(𝑦, 𝜏) = (ln(𝑦)+𝟎.𝟓𝜎^2𝜏)/𝜎√𝜏 is the correct formula. In other words, show that the analytic solution in Eq. (27) of Carr (1988) is the same as the Monte-Carlo simulation for a CEO. To calculate Eq. (27) of Carr (1988), use the following parameter: V =51.8195, D = 34.5303, q =0.5555, 𝜏𝑐= 1, 𝜏𝑠=13.5730, 𝜎𝑉 = 0.5862, 𝜎𝐷 = 0.4790 and 𝜌= 0.6386. To do the Monte-Carlo simulation for a CEO, use the same parameters, but you will need an additional parameter: risk-free interest rate. For the risk-free interest rate, use r =0.0400.
 
